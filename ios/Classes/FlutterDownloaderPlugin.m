@@ -23,6 +23,9 @@
 #define KEY_OPEN_FILE_FROM_NOTIFICATION @"open_file_from_notification"
 #define KEY_QUERY @"query"
 #define KEY_TIME_CREATED @"time_created"
+#define KEY_SIZE @"size"
+#define KEY_MODIFIED @"modified"
+#define KEY_DATA @"data"
 
 #define NULL_VALUE @"<null>"
 

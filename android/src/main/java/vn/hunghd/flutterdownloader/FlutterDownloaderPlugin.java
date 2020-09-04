@@ -6,6 +6,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import androidx.core.app.NotificationManagerCompat;
+import androidx.work.BackoffPolicy;
+import androidx.work.Constraints;
+import androidx.work.Data;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -14,14 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-
-import androidx.work.BackoffPolicy;
-import androidx.work.Constraints;
-import androidx.work.Data;
-import androidx.work.NetworkType;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
-import androidx.work.WorkRequest;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.BinaryMessenger;
@@ -71,7 +70,7 @@ public class FlutterDownloaderPlugin implements MethodCallHandler, FlutterPlugin
     public void onMethodCall(MethodCall call, MethodChannel.Result result) {
         if (call.method.equals("initialize")) {
             initialize(call, result);
-        } else if (call.method.equals("registerCallback"))  {
+        } else if (call.method.equals("registerCallback")) {
             registerCallback(call, result);
         } else if (call.method.equals("enqueue")) {
             enqueue(call, result);
@@ -166,6 +165,7 @@ public class FlutterDownloaderPlugin implements MethodCallHandler, FlutterPlugin
         String savedDir = call.argument("saved_dir");
         String filename = call.argument("file_name");
         String headers = call.argument("headers");
+        String data = call.argument("data");
         boolean showNotification = call.argument("show_notification");
         boolean openFileFromNotification = call.argument("open_file_from_notification");
         boolean requiresStorageNotLow = call.argument("requires_storage_not_low");
@@ -174,7 +174,7 @@ public class FlutterDownloaderPlugin implements MethodCallHandler, FlutterPlugin
         String taskId = request.getId().toString();
         result.success(taskId);
         sendUpdateProgress(taskId, DownloadStatus.ENQUEUED, 0);
-        taskDao.insertOrUpdateNewTask(taskId, url, DownloadStatus.ENQUEUED, 0, filename, savedDir, headers, showNotification, openFileFromNotification);
+        taskDao.insertOrUpdateNewTask(taskId, url, DownloadStatus.ENQUEUED, 0, filename, savedDir, headers, showNotification, openFileFromNotification, data);
     }
 
     private void loadTasks(MethodCall call, MethodChannel.Result result) {

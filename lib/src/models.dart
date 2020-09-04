@@ -43,16 +43,12 @@ class DownloadTask {
   final String url;
   final String filename;
   final String savedDir;
+  final int size;
+  final String data;
   final int timeCreated;
+  final int modified;
 
-  DownloadTask(
-      {this.taskId,
-      this.status,
-      this.progress,
-      this.url,
-      this.filename,
-      this.savedDir,
-      this.timeCreated});
+  DownloadTask({this.taskId, this.status, this.progress, this.url, this.filename, this.savedDir, this.size, this.data, this.timeCreated, this.modified});
 
   @override
   String toString() =>
