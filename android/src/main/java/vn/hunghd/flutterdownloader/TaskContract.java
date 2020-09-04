@@ -21,8 +21,7 @@ public class TaskContract {
         public static final String COLUMN_NAME_OPEN_FILE_FROM_NOTIFICATION = "open_file_from_notification";
         public static final String COLUMN_NAME_TIME_CREATED = "time_created";
         public static final String COLUMN_NAME_DATA = "data";
-        public static final String COLUMN_NAME_SIZE = "size";
-        public static final String COLUMN_NAME_MODIFIED = "modified";
+        public static final String COLUMN_NAME_SPEED = "speed";
     }
 
 }
